@@ -28,12 +28,11 @@ medved. Zvrhano zibelko sladkih hrušk mi je prinesel za en sam izdrt trn"."""
 import re
 
 def find_words(niz, podniz):
-    mnozica_besed = set()
-    seznam = re.findall(podniz, niz)
-    print(seznam)
+    reg = r'\w*' + podniz + r'\w*\b'
+    mnozica_besed = set(re.findall(reg, niz)) 
     return mnozica_besed
 
-find_words(test_text, '')
+print(find_words(test_text, 'de'))
 ###############################################################################
 # 2) Sestavite funkcijo [find_prefix], ki vrne množico vseh besed, ki se
 #    pojavijo v nizu in imajo dano predpono.
@@ -41,8 +40,12 @@ find_words(test_text, '')
 # >>> find_prefix(test_text, 'zi')
 # {'zibala', 'zibel', 'zibelko'}
 ###############################################################################
+def find_prefix(niz, predpona):
+    reg = r'\b' + predpona + r'\w*\b'
+    mnozica_besed = set(re.findall(reg, niz))
+    return mnozica_besed
 
-
+print(find_prefix(test_text, 'zi'))
 ###############################################################################
 # 3) Sestavite funkcijo [find_suffix], ki vrne množico vseh besed, ki se
 #    pojavijo v nizu in imajo dano pripono.
@@ -50,8 +53,12 @@ find_words(test_text, '')
 # >>> find_suffix(test_text, 'la')
 # {'zibala', 'razveselila', 'prestrašila', 'šivala', 'opazila', 'tla'}
 ###############################################################################
+def find_suffix(niz, pripona):
+    reg = r'\w*' + pripona + r'\b'
+    mnozica_besed = set(re.findall(reg, niz))
+    return mnozica_besed
 
-
+print(find_suffix(test_text, 'la'))
 ###############################################################################
 # 4) Sestavite funkcijo [double_letters], ki sprejme niz in vrne množico vseh
 #    besed, ki vsebujejo podvojene črke.
@@ -59,3 +66,8 @@ find_words(test_text, '')
 # >>> double_letters('A volunteer is worth twenty pressed men.')
 # {'volunteer', 'pressed'}
 ###############################################################################
+def double_letters(niz):
+    seznam = re.findall(r'(\b\w*(\w)\2\w*\b)', niz)
+    return {element[0] for element in seznam}
+
+print(double_letters('A volunteer is worth twenty pressed men.'))
