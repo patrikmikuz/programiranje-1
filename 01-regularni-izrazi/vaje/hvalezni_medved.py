@@ -67,7 +67,7 @@ print(find_suffix(test_text, 'la'))
 # {'volunteer', 'pressed'}
 ###############################################################################
 def double_letters(niz):
-    seznam = re.findall(r'(\b\w*(\w)\2\w*\b)', niz)
+    seznam = re.findall(r'\b(\w*(\w)\2\w*)\b', niz)
     return {element[0] for element in seznam}
 
 print(double_letters('A volunteer is worth twenty pressed men.'))
